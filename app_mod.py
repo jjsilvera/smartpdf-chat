@@ -53,7 +53,7 @@ if uploaded_files is not None and len(uploaded_files) > 0:
         if processed_count > 0:
             st.session_state.documents_processed = True
             st.session_state.processed_files = file_names[:processed_count]
-            st.success(f"🎉 {processed_count} document(s) processed successfully! You can now ask questions.")
+            st.success(f"{processed_count} document(s) processed successfully! You can now ask questions.")
         else:
             st.error("❌ No documents were processed successfully.")
             
@@ -87,5 +87,6 @@ if st.session_state.documents_processed:
             st.warning("Please enter a question first.")
 else:
     st.info("👆 Upload PDF files to start asking questions")
+
 
 
