@@ -5,7 +5,7 @@ from rag_utility_mod import process_document_to_chroma_db, answer_question
 
 # Number of files allowed
 MAX_FILES = 3
-
+st.set_page_config(page_title="SmartPDF Chatbot", page_icon="📕", layout="centered")
 st.title("🚀 SmartPDF Chat ")
 
 # Initilialize session
@@ -87,4 +87,5 @@ if st.session_state.documents_processed:
             st.warning("Please enter a question first.")
 else:
     st.info("👆 Upload PDF files to start asking questions")
+
 
