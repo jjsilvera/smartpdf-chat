@@ -23,7 +23,7 @@ if 'memory' not in st.session_state:
     
 # Sidebar
 with st.sidebar:
-    st.header("⚙️ Search settings")
+    st.header("⚙️ Settings")
     k = st.slider("Number of similar documents to retrieve (k)", min_value=1, max_value=10, value=4, step=1,
     help = "Adjust the number of similar documents retrieved for answering questions. A higher k may provide more context but can also introduce noise.")
     temperature = st.slider("Temperature for response generation", min_value=0.0, max_value=1.0, value=0.0, step=0.1,
@@ -44,7 +44,7 @@ with st.sidebar:
         st.rerun()
         
     if st.session_state.get("show_reset_toast"):
-        st.toast("✅ All data has been reset. You can now upload new documents.") # toast
+        st.toast("✅ All data has been reset. You can now upload new documents.") # success toast
         st.session_state.show_reset_toast = False
         
     if st.session_state.processed_files:
