@@ -40,8 +40,13 @@ with st.sidebar:
         st.session_state.processed_files = []
         st.session_state.messages = []
         st.session_state.memory.clear()
-        st.success("✅ All data has been reset. You can now upload new documents.")
+        st.session_state.show_reset_toast = True
         st.rerun()
+        
+    if st.session_state.get("show_reset_toast"):
+        st.toast("✅ All data has been reset. You can now upload new documents.") # toast
+        st.session_state.show_reset_toast = False
+        
     if st.session_state.processed_files:
         st.markdown('### 📄 Processed Files')
         for f in st.session_state.processed_files:
@@ -66,7 +71,7 @@ with col1:
             file_names = [f.name for f in uploaded_files]
             st.write(f"**Uploaded Files:** {', '.join(file_names)}")
             
-            if st.button("🚀 Process Uploaded Files"):
+            if st.button("Process Uploaded Files"):
                 processed_count = 0
                 progress_bar = st.progress(0)
                 status_container = st.container()
@@ -77,11 +82,10 @@ with col1:
                             if process_document_to_chroma_db(uploaded_file):
                                 processed_count += 1
                                 st.toast(f"✅ {uploaded_file.name} uploaded successfully!", icon="✅")
-                                #st.info(f"✅ {uploaded_file.name} processed successfully!")
+                                
                                 with status_container:
                                     st.info(f"✅ {uploaded_file.name} processed successfully!")
-                                    #st.write(f"**Processed:** {uploaded_file.name}")
-                                
+                                                                    
                     except Exception as e:
                         with status_container:
                             st.error(f"❌ Error processing {uploaded_file.name}: {str(e)}")
